@@ -1,5 +1,13 @@
 .box {
-  width: 5rem;
-  height: 5rem;
-  margin: 25rem auto;
+  width: 2rem;
+  height: 2rem;
+  margin: 12rem auto;
+}
+
+@media only screen and (min-width: 992px) {
+  .box {
+    width: 4rem;
+    height: 4rem;
+    margin: 18rem auto;
+  }
 }

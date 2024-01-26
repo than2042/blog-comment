@@ -1,0 +1,31 @@
+.postContainer {
+  width: 80%;
+  margin: auto;
+}
+
+h1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card {
+  width: 23rem;
+  height: 10rem;
+  padding: 1rem;
+  background: #faebd7;
+  border-radius: 20px;
+}
+
+@media only screen and (min-width: 992px) {
+  h1 {
+    margin-left: 9rem;
+  }
+}

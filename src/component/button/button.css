@@ -1,6 +1,24 @@
 .button {
   width: 9rem;
   height: 3rem;
+  margin-top: 2rem;
   border-radius: 0.7rem;
-  background: rgb(53, 209, 157);
+  background: #0baa75;
+  color: #ffffff;
+  font-size: 1.2rem;
+  border: none;
+}
+
+.disabled {
+  background: black;
+  color: white;
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 992px) {
+  .box {
+    width: 9rem;
+    height: 3rem;
+    border-radius: 0.7rem;
+  }
 }
