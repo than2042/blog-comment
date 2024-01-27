@@ -1,3 +1,19 @@
-.idInput {
+.commentForm {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* .idInput {
   display: none;
+} */
+
+.commentText {
+  width: 15rem;
+  min-height: 1rem;
+}
+
+.commentSend {
+  border: none;
 }

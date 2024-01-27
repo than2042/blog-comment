@@ -31,3 +31,13 @@ SELECT * FROM posts WHERE id = params.id
 SELECT * FROM posts
   ORDER BY title ASC
 
+-- FOREIGN key CONSTRAINT DELETE
+DELETE FROM comments WHERE posts_id = 1
+
+SELECT posts.id, comments.comment
+FROM posts
+INNER JOIN comments
+ON posts.id=comments.id;
+
+Update comments SET comment = posts.id FROM posts WHERE comments.id = posts.id
+
