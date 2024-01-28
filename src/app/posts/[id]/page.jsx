@@ -16,10 +16,11 @@ const SinglePost = async ({ params }) => {
   const handleCommentEdit = async (formData) => {
     "use server";
     const comment = formData.get("comment");
+    console.log(comment);
     // const posts_id = formData.get("id");
-    await sql`Update comments SET comment = posts.id FROM posts WHERE ${comment}  = comment`;
-    revalidatePath("/posts");
-    redirect("/posts");
+    await sql`Update comments SET comment = ${comment} WHERE posts_id = ${params.id}`;
+    revalidatePath(`/posts/${params.id}`);
+    redirect(`/posts/${params.id}`);
   };
 
   let categoryImg = "/assets/art.jpg";
@@ -36,9 +37,9 @@ const SinglePost = async ({ params }) => {
           ))}
 
           <form action={handleCommentEdit} method="post">
-            <input name="id" value={comments.comment} />
+            <input type="text" name="comment" value={comments.comment} />
             <button className="edit" type="submit">
-              Edit
+              Edit Comment
             </button>
           </form>
         </div>

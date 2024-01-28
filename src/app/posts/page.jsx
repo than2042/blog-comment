@@ -50,7 +50,6 @@ const Posts = async () => {
                   <p>{post.content}</p>
                 </CardFooter>
               </Card>
-
               <CommentModal
                 id={post.id}
                 name="comment"
