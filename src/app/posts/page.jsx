@@ -7,11 +7,15 @@ import CommentModal from "../../component/commentModals/CommentModal";
 
 import "./page.css";
 
-const Posts = async () => {
-  const posts = await sql`SELECT * FROM posts`;
+const Posts = async ({ searchParams }) => {
+  let sqlQuery = `SELECT * FROM posts`;
 
-  const orderedPost = await sql`SELECT * FROM posts
-  ORDER BY title ASC`;
+  if (searchParams.sort === "asc") {
+    sqlQuery += " ORDER BY LOWER(title) ASC";
+  } else {
+    sqlQuery += " ORDER BY LOWER(title) DESC";
+  }
+  const posts = await sql.query(sqlQuery);
 
   // post comment into database
   const handleComment = async (formData) => {
@@ -36,20 +40,26 @@ const Posts = async () => {
   return (
     <div className="postContainer">
       <h1>Blog Page!!!</h1>
+      <Link href="/posts?sort=asc">
+        Display {searchParams.sort === "asc" ? "Descending" : "Ascending"}
+      </Link>
       <div className="cardContainer">
         {posts.rows.map((post) => {
           return (
             <div className="card" key={post.id}>
-              {/* <Link href={`posts/${post.id}`}> */}
-              <Card isFooterBlurred radius="lg" className="border-none">
-                <CardHeader>
-                  <h3>{post.title}</h3>
-                  <p>{post.createdat.toLocaleString()}</p>
-                </CardHeader>
-                <CardFooter>
-                  <p>{post.content}</p>
-                </CardFooter>
-              </Card>
+              <div>
+                <Link href={`posts/${post.id}`}>
+                  <Card isFooterBlurred radius="lg" className="border-none">
+                    <CardHeader>
+                      <h3>{post.title}</h3>
+                      <p>{post.createdat.toLocaleString()}</p>
+                    </CardHeader>
+                    <CardFooter>
+                      <p>{post.content}</p>
+                    </CardFooter>
+                  </Card>
+                </Link>
+              </div>
               <CommentModal
                 id={post.id}
                 name="comment"
@@ -63,21 +73,10 @@ const Posts = async () => {
                   Delete
                 </button>
               </form>
-
-              {/* </Link> */}
             </div>
           );
         })}
       </div>
-      {orderedPost.rows.map((item) => {
-        return (
-          <Link href={`posts/${item.id}`} key={item.id}>
-            <div key={item.id}>
-              <h3>{item.title}</h3>
-            </div>
-          </Link>
-        );
-      })}
     </div>
   );
 };
